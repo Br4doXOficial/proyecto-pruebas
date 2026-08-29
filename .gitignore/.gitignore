@@ -1,0 +1,10 @@
+target/
+*.class
+.vscode/
+.idea/
+*.iml
+*.log
+.DS_Store
+Thumbs.db
+surefire-reports/
+test-output/
