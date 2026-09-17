@@ -50,6 +50,8 @@ El archivo `.github/workflows/ci.yml` ejecuta los stages de build, pruebas unita
 
 También se incluye un `Jenkinsfile` equivalente para demostrar que la solución no depende de una única plataforma.
 
+Evidencia remota verificada: [GitHub Actions, ejecución N.° 6 completada correctamente](https://github.com/Br4doXOficial/proyecto-pruebas/actions/runs/35283980657).
+
 ## Deployment pipeline
 
 El workflow `.github/workflows/deployment.yml` realiza build, acceptance tests, despliegue Blue-Green y smoke test. El script `deploy-blue-green.sh` instala el JAR en el slot inactivo y solo cambia el enlace `deploy/current` después de obtener la respuesta `HEALTHY`.
