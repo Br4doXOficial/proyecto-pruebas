@@ -1,50 +1,46 @@
-name: Pipeline de Integración Continua
+name: CI Build y Pruebas
 
 on:
   push:
-    branches: [ main, develop, feature/* ]
+    branches: [main, develop, "feature/**"]
   pull_request:
-    branches: [ main, develop ]
+    branches: [main, develop]
+
+permissions:
+  contents: read
 
 jobs:
   build-and-test:
-    name: Compilar y ejecutar pruebas
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Clonar el repositorio
-      - name: Checkout código
+      - name: Obtener codigo
         uses: actions/checkout@v4
 
-      # 2. Configurar Java 17
-      - name: Configurar JDK 17
+      - name: Configurar Java 17 y cache Maven
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: "17"
+          cache: maven
 
-      # 3. Cache de dependencias Maven
-      - name: Cache de dependencias
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+      - name: Build sin pruebas
+        run: >-
+          mvn -B clean package
+          -DskipUnitTests=true
+          -DskipIntegrationTests=true
+          -DskipAcceptanceTests=true
 
-      # 4. Compilar el proyecto
-      - name: Compilar proyecto
-        run: mvn compile
+      - name: Pruebas unitarias
+        run: mvn -B test
 
-      # 5. Ejecutar pruebas y generar reportes
-      - name: Ejecutar pruebas y generar reportes
-        run: mvn clean verify
+      - name: Pruebas de integracion
+        run: mvn -B verify -DskipUnitTests=true
 
-      # 6. Subir reportes de pruebas (HTML)
-      - name: Subir reportes de pruebas
+      - name: Publicar reportes de pruebas
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: test-reports
+          name: reportes-pruebas
           path: |
-            target/site/
             target/surefire-reports/
+            target/failsafe-reports/

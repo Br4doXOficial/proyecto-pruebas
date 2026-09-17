@@ -1,10 +1,6 @@
 target/
-*.class
-.vscode/
-.idea/
-*.iml
+deploy/
 *.log
-.DS_Store
-Thumbs.db
-surefire-reports/
-test-output/
+.idea/
+.vscode/
+
