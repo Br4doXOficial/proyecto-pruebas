@@ -44,3 +44,20 @@ jobs:
           path: |
             target/surefire-reports/
             target/failsafe-reports/
+
+  evidencia-despliegue-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Blue Green smoke test y rollback en Windows PowerShell
+        shell: powershell
+        run: .\scripts\evidencia-windows.ps1
