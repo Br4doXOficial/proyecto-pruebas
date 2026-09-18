@@ -46,7 +46,7 @@ mvn -B verify -DskipUnitTests=true -DskipIntegrationTests=true -DskipAcceptanceT
 
 ## Integración continua
 
-El archivo `.github/workflows/ci.yml` ejecuta los stages de build, pruebas unitarias y pruebas de integración en cada push o pull request. Los reportes Surefire y Failsafe se guardan como artefactos, incluso cuando una prueba falla.
+El archivo `.github/workflows/ci.yml` ejecuta los stages de build, pruebas unitarias y pruebas de integración en cada push o pull request. Los reportes Surefire y Failsafe se guardan como artefactos, incluso cuando una prueba falla. Un segundo job usa `windows-latest` y Windows PowerShell para ejecutar el despliegue Blue-Green, el smoke test y el rollback.
 
 También se incluye un `Jenkinsfile` equivalente para demostrar que la solución no depende de una única plataforma.
 
@@ -88,7 +88,7 @@ La carpeta `evidencias` contiene capturas obtenidas desde ejecuciones reales del
 
 1. Historial y ramas Git consultadas desde Windows.
 2. Build, pruebas unitarias, integración y publicación de reportes en GitHub Actions.
-3. Despliegues Blue-Green, smoke test y rollback exitoso.
+3. Despliegue Blue-Green, smoke test y rollback exitoso ejecutados con Windows PowerShell.
 
 ### Flujo GitFlow
 
