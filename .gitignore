@@ -1,10 +1,10 @@
 target/
-*.class
-.vscode/
-.idea/
-*.iml
+deploy/
+deploy-windows/
+dist/
 *.log
+*.tmp
+.idea/
+.vscode/
 .DS_Store
 Thumbs.db
-surefire-reports/
-test-output/

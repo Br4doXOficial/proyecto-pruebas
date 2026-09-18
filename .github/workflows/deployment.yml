@@ -1,0 +1,75 @@
+name: CD Acceptance y Blue Green
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Operacion en ambiente de prueba
+        required: true
+        default: deploy
+        type: choice
+        options:
+          - deploy
+          - rollback
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build
+        run: >-
+          mvn -B clean package
+          -DskipUnitTests=true
+          -DskipIntegrationTests=true
+          -DskipAcceptanceTests=true
+
+      - name: Acceptance tests
+        run: >-
+          mvn -B verify
+          -DskipUnitTests=true
+          -DskipIntegrationTests=true
+          -DskipAcceptanceTests=false
+
+      - name: Restaurar estado del ambiente de prueba
+        id: restore-test-environment
+        uses: actions/cache/restore@v4
+        with:
+          path: deploy
+          key: test-environment-${{ github.run_id }}
+          restore-keys: |
+            test-environment-
+
+      - name: Desplegar Blue Green
+        if: ${{ inputs.operation == 'deploy' }}
+        run: ./scripts/deploy-blue-green.sh target/inventario-automatizado-1.0.0.jar
+
+      - name: Ejecutar rollback solicitado
+        if: ${{ inputs.operation == 'rollback' }}
+        run: ./scripts/rollback.sh
+
+      - name: Smoke test del ambiente activo
+        run: ./scripts/smoke-test.sh
+
+      - name: Rollback automatico si falla el despliegue
+        if: failure() && inputs.operation == 'deploy'
+        run: ./scripts/rollback.sh || true
+
+      - name: Guardar estado del ambiente de prueba
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: deploy/
+          key: test-environment-${{ github.run_id }}
