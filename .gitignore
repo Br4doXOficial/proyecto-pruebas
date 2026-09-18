@@ -3,5 +3,8 @@ deploy/
 deploy-windows/
 dist/
 *.log
+*.tmp
 .idea/
 .vscode/
+.DS_Store
+Thumbs.db
