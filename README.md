@@ -72,6 +72,16 @@ Si el despliegue falla, el pipeline intenta ejecutar automáticamente `rollback.
 
 El cambio de versión se hace mediante un enlace simbólico, por lo que no es necesario reconstruir el artefacto anterior y el retorno es inmediato.
 
+### Ejecución equivalente en Windows
+
+Desde PowerShell, la evidencia completa de build, despliegue Blue-Green, smoke test y rollback se obtiene con:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\evidencia-windows.ps1
+```
+
+El script utiliza los slots `deploy-windows\blue` y `deploy-windows\green`, comprueba la respuesta `HEALTHY` antes de activar cada versión y conserva el slot anterior para ejecutar el rollback.
+
 ## Evidencias
 
 La carpeta `evidencias` contiene capturas obtenidas desde ejecuciones reales del repositorio local:
