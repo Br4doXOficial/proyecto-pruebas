@@ -91,6 +91,7 @@ function Invoke-Rollback {
 }
 
 Write-Host "=== EVIDENCIA 3: DEPLOYMENT PIPELINE EN WINDOWS ===" -ForegroundColor Cyan
+Write-Host "ENTORNO os=$env:OS powershell=$($PSVersionTable.PSVersion) arquitectura=$env:PROCESSOR_ARCHITECTURE" -ForegroundColor Cyan
 Write-Host "[1/5] Build del artefacto" -ForegroundColor Yellow
 $mavenCommand = Get-Command mvn.cmd -ErrorAction SilentlyContinue
 if ($null -ne $mavenCommand) {
