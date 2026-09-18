@@ -84,19 +84,25 @@ El script utiliza los slots `deploy-windows\blue` y `deploy-windows\green`, comp
 
 ## Evidencias
 
-La carpeta `evidencias` contiene capturas obtenidas desde ejecuciones reales del repositorio local:
+La carpeta `evidencias` contiene capturas obtenidas desde ejecuciones reales del repositorio y de GitHub Actions:
 
-1. Historial y ramas GitFlow.
-2. Build y pruebas Maven exitosas.
+1. Historial y ramas Git consultadas desde Windows.
+2. Build, pruebas unitarias, integración y publicación de reportes en GitHub Actions.
 3. Despliegues Blue-Green, smoke test y rollback exitoso.
 
 ### Flujo GitFlow
 
-![Flujo GitFlow](evidencias/01_gitflow.png)
+![Historial Git en Windows](evidencias/windows_01_gitflow.png)
 
-### Build y pruebas
+### Build y pruebas en GitHub Actions
 
-![Pruebas Maven](evidencias/02_pruebas_maven.png)
+![Build](evidencias/windows_02_build.png)
+
+![Pruebas unitarias](evidencias/windows_03_unitarias.png)
+
+![Pruebas de integración](evidencias/windows_04_integracion.png)
+
+![Publicación de reportes](evidencias/windows_05_reportes.png)
 
 ### Despliegue y rollback
 
