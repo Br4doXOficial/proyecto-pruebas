@@ -50,7 +50,7 @@ El archivo `.github/workflows/ci.yml` ejecuta los stages de build, pruebas unita
 
 También se incluye un `Jenkinsfile` equivalente para demostrar que la solución no depende de una única plataforma.
 
-Evidencia remota verificada: [GitHub Actions, ejecución N.° 6 completada correctamente](https://github.com/Br4doXOficial/proyecto-pruebas/actions/runs/35283980657).
+Evidencia remota verificada: [GitHub Actions, ejecución N.° 19 completada correctamente](https://github.com/Br4doXOficial/proyecto-pruebas/actions/runs/35306174086).
 
 ## Deployment pipeline
 
@@ -106,7 +106,7 @@ La carpeta `evidencias` contiene capturas obtenidas desde ejecuciones reales del
 
 ### Despliegue y rollback
 
-![Despliegue Blue-Green y rollback](evidencias/03_despliegue_rollback.png)
+![Despliegue Blue-Green y rollback en Windows PowerShell](evidencias/windows_06_despliegue.png)
 
 ## Archivos principales
 
