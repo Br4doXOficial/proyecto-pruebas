@@ -1,6 +1,7 @@
 target/
 deploy/
+deploy-windows/
+dist/
 *.log
 .idea/
 .vscode/
-
